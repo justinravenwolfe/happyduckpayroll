@@ -40,8 +40,8 @@ function start_app(){
         updateEmployee(); //Added
         break;
       case 'Delete Employee':
-        console.log("TODO: Delete Employee");
-          break;
+        deleteEmployee(); 
+        break;
       case 'View all departments':
         viewDepartments()
         break;
@@ -197,4 +197,66 @@ function addDepartment()
 
   });  
 
+}
+
+function addRole(){
+  inquirer.prompt([
+    {
+      //your list of questions
+      type: 'title',
+      name: 'title',
+      type: 'string',
+      message: 'What is the name of the position?',
+    },
+    {
+      //your list of questions
+      type: 'title',
+      name: 'salary',
+      type: 'int',
+      message: 'What is the salary for the position?',
+    },
+    {
+      //your list of questions
+      type: 'title',
+      name: 'dep_id',
+      type: 'int',
+      message: 'What is the department ID?',
+    },
+    ]).then((answers) => {
+    var query_role_insert = "INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)";
+    connection.query(query_role_insert, [answers.title, answers.salary, answers.dep_id], (err, results) => {
+
+      if (err) throw err;
+      console.log("Role added successfully");
+      start_app();
+    });
+
+   
+    }); 
+
+}
+
+function deleteEmployee(){
+  inquirer.prompt([
+    {
+      type:'input',
+      name: 'employee_id',
+      message: 'What is the employee ID of the person you are deleting'
+    },
+    {
+      type:'confirm',
+      name: 'confirmation',
+      message: 'Are you sure you want to delete this employee?'
+    }
+  ]).then((answers) => {
+    if(answers.confirmation){
+      var delete_query = "DELETE FROM employees WHERE id = ?";
+      connection.query(delete_query, [answers.employee_id], (err, results) => {
+        if (err) throw err;
+        console.log("Employee " + answers.employee_id + " deleted sucessfully");
+      });
+    }
+
+  }); 
+  start_app(); 
 }
