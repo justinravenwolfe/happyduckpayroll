@@ -33,8 +33,7 @@ CREATE TABLE IF NOT EXISTS employees (
 -- View all departments
 SELECT * FROM departments;
 
--- View all roles
-SELECT * FROM roles;
+-- View all role
 
 -- View all employees
 SELECT * FROM employees;
@@ -53,3 +52,5 @@ UPDATE employees SET role_id = 70 WHERE first_name = 'Rosa';
 
 -- Delete an employee (assuming you want to delete based on the first name)
 DELETE FROM employees WHERE first_name = 'EmployeeFirstName';
+
+-- Write Inner and Outer Joins, Full Join <- Not used often 
