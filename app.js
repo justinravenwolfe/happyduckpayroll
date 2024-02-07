@@ -52,7 +52,7 @@ function start_app(){
         addDepartment();
         break;
       case 'Add a role':
-        console.log("TODO: Add a role");
+        addRole(); 
         break;
     }
   }); 
@@ -181,12 +181,20 @@ function addDepartment()
   inquirer.prompt([
   {
     //your list of questions
-
-
+    type: 'input',
+    name: 'dep_name',
+    type: 'string',
+    message: 'What is the name of the new department?',
   },
   ]).then((answers) => {
   //Handeling 
-
+  var dep_insert_query = "INSERT INTO departments (name) VALUES (?)";
+  connection.query(dep_insert_query ,answers.dep_name, (err, results) => {
+    if (err) throw err;
+    console.log("Department added successfully");
+    start_app(); 
   }); 
+
+  });  
 
 }
