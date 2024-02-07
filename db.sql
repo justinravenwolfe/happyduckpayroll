@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS employees (
 SELECT * FROM departments;
 
 -- View all role
-
+SELECT  * FROM roles
 -- View all employees
 SELECT * FROM employees;
 
