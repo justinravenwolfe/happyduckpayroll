@@ -20,6 +20,8 @@ connection.connect((err) => {
 }); 
 //Drafting the code to give the prompts
 function start_app(){
+  //Clears the console 
+  console.clear(); 
   inquirer.prompt([
     {
       type: 'list',
@@ -27,7 +29,7 @@ function start_app(){
       message: 'Select Operation',
       choices: ['View Employees', 'Add Employee', 'Update Employee', 'Delete Employee','View all departments','View all roles','Add a department','Add a role'],
     }
-  
+  //Switch case to manage different paths for various operations
   ]).then((answers) => {
     switch(answers.operation){
       case 'View Employees':
@@ -68,7 +70,7 @@ function viewEmployees(){
   //Goes back to main menu
   start_app(); 
 }
-
+//Look at all departments
 function viewDepartments(){
   connection.query('SELECT * FROM departments', (err, results) => {
     if (err) throw err; 
@@ -77,7 +79,7 @@ function viewDepartments(){
    //Goes back to main menu
   start_app(); 
 }
-
+//Look at all roles 
 function viewRoles(){
   connection.query('SELECT * FROM roles', (err, results) => {
     if (err) throw err; 
@@ -86,6 +88,7 @@ function viewRoles(){
    //Goes back to main menu
   start_app(); 
 }
+//Add an employee to the databse 
 function addEmployee(){
   inquirer.prompt([
     //Defining all the questions we need to ask the user to add a new employee
@@ -123,6 +126,7 @@ function addEmployee(){
     }); 
   }); 
 }
+//Update an employee within the database
 function updateEmployee(){
   inquirer.prompt([
     //Defining all the questions we need to ask the user to add a new employee
@@ -175,7 +179,7 @@ var update_query = 'UPDATE employees SET first_name = ?, last_name = ?, role_id 
       });
     });
 }
-
+//Add a department 
 function addDepartment()
 {
   inquirer.prompt([
@@ -198,26 +202,26 @@ function addDepartment()
   });  
 
 }
-
+//Add a role 
 function addRole(){
   inquirer.prompt([
     {
       //your list of questions
-      type: 'title',
+      type: 'input',
       name: 'title',
       type: 'string',
       message: 'What is the name of the position?',
     },
     {
       //your list of questions
-      type: 'title',
+      type: 'input',
       name: 'salary',
       type: 'int',
       message: 'What is the salary for the position?',
     },
     {
       //your list of questions
-      type: 'title',
+      type: 'input',
       name: 'dep_id',
       type: 'int',
       message: 'What is the department ID?',
@@ -235,28 +239,29 @@ function addRole(){
     }); 
 
 }
-
-function deleteEmployee(){
+//Delete an employee
+function deleteEmployee() {
   inquirer.prompt([
     {
-      type:'input',
-      name: 'employee_id',
-      message: 'What is the employee ID of the person you are deleting'
+      type: 'input',
+      name: 'delete_employee_id',
+      message: 'What is the employee ID of the person you are deleting',
     },
     {
-      type:'confirm',
+      type: 'confirm',
       name: 'confirmation',
-      message: 'Are you sure you want to delete this employee?'
+      message: 'Are you sure you want to delete this employee?',
     }
   ]).then((answers) => {
-    if(answers.confirmation){
+    if (answers.confirmation) {
       var delete_query = "DELETE FROM employees WHERE id = ?";
-      connection.query(delete_query, [answers.employee_id], (err, results) => {
+      connection.query(delete_query, [answers.delete_employee_id], (err, results) => {
         if (err) throw err;
-        console.log("Employee " + answers.employee_id + " deleted sucessfully");
+        console.log("Employee " + answers.delete_employee_id + " deleted successfully");
       });
+    } else {
+      console.log("Deletion canceled by the user");
     }
-
+    start_app();
   }); 
-  start_app(); 
 }

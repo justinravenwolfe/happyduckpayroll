@@ -1,3 +1,4 @@
+-- Draft of SQL code for the management of happy duck employees
 -- Structured Query Language, query-line of sql code
 -- This creates a new database with the given name
 CREATE DATABASE IF NOT EXISTS happyduck_data;
