@@ -1,7 +1,7 @@
 Title: Employee CLI Content Management System (Module 12)
 Authors: Justin Ramirez, Alliyah Steele of Varsity tutors
 File Link (Github): https://github.com/justinravenwolfe/happyduckpayroll
-Walkthrough Link: 
+Walkthrough Link: https://drive.google.com/file/d/17g8ddfE7tDEmdh762XdetsGATZZCfrZj/view?usp=sharing
 
 1) Purpose
 To show a basic knowledge of how to use MySQL, inquirer and Node.js for an everyday project at work. To add to a portfolio and show a potential employer a viable project.  
